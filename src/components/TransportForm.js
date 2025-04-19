@@ -10,11 +10,10 @@ const TransportForm = () => {
   const [error, setError] = useState('');
   const [suggestedLocations, setSuggestedLocations] = useState({ source: [], destination: [] });
 
-  // Check server status on component mount
   useEffect(() => {
     const checkServerStatus = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/status', {
+        const response = await fetch('https://bhraman-6m15.onrender.com/api/status', {
           method: 'GET',
         });
         if (!response.ok) {
@@ -29,12 +28,11 @@ const TransportForm = () => {
     checkServerStatus();
   }, []);
 
-  // Fetch location suggestions based on input
   const fetchSuggestions = async (input, type) => {
     if (!input || input.length < 3) return;
     
     try {
-      const response = await fetch(`http://localhost:5000/api/locations/suggest?query=${encodeURIComponent(input)}`);
+      const response = await fetch(`https://bhraman-6m15.onrender.com/api/locations/suggest?query=${encodeURIComponent(input)}`);
       if (response.ok) {
         const data = await response.json();
         setSuggestedLocations(prev => ({
@@ -51,7 +49,6 @@ const TransportForm = () => {
     const value = e.target.value;
     setter(value);
     
-    // Debounce suggestion requests
     setTimeout(() => {
       fetchSuggestions(value, type);
     }, 300);
@@ -77,7 +74,7 @@ const TransportForm = () => {
     setError('');
 
     try {
-      const response = await fetch('http://localhost:5000/api/planTrip', {
+      const response = await fetch('https://bhraman-6m15.onrender.com/api/planTrip', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -86,7 +83,7 @@ const TransportForm = () => {
           source: source + (source.toLowerCase().includes('delhi') ? '' : ', Delhi'),
           destination: destination + (destination.toLowerCase().includes('agra') ? '' : ', Agra'),
           preference,
-          includeCoordinates: true, // Request coordinates to help with station finding
+          includeCoordinates: true,
         }),
       });
 
@@ -111,8 +108,6 @@ const TransportForm = () => {
       });
     } catch (err) {
       console.error('API Error:', err);
-      
-      // More specific error messages based on observed issues
       if (err.message && err.message.includes("railway station")) {
         setError('Could not find railway stations near the provided locations. Please try more specific location names including city names.');
       } else {

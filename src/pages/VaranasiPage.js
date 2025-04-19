@@ -2,7 +2,7 @@ import CityLayout from "../components/CityLayout";
 
 const varanasiInfo = {
   cityName: "Varanasi",
-  videoSrc: "/videos/varanasi.webm",
+  videoSrc: "/videos/varanasi.mp4",
   about: "Varanasi, the spiritual capital of India, is one of the world's oldest living cities, known for its ghats, temples, and sacred Ganges River.",
   places: [
     { name: "Dashashwamedh Ghat", image: "/images/varanasi1.jpg", desc: "Famous ghat for evening Ganga Aarti." },

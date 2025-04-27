@@ -10,6 +10,7 @@ const TransportForm = () => {
   const [error, setError] = useState('');
   const [suggestedLocations, setSuggestedLocations] = useState({ source: [], destination: [] });
 
+  // Check server status on component mount
   useEffect(() => {
     const checkServerStatus = async () => {
       try {
@@ -28,6 +29,7 @@ const TransportForm = () => {
     checkServerStatus();
   }, []);
 
+  // Fetch location suggestions based on input
   const fetchSuggestions = async (input, type) => {
     if (!input || input.length < 3) return;
     
@@ -49,6 +51,7 @@ const TransportForm = () => {
     const value = e.target.value;
     setter(value);
     
+    // Debounce suggestion requests
     setTimeout(() => {
       fetchSuggestions(value, type);
     }, 300);
@@ -83,7 +86,7 @@ const TransportForm = () => {
           source: source + (source.toLowerCase().includes('delhi') ? '' : ', Delhi'),
           destination: destination + (destination.toLowerCase().includes('agra') ? '' : ', Agra'),
           preference,
-          includeCoordinates: true,
+          includeCoordinates: true, // Request coordinates to help with station finding
         }),
       });
 
@@ -108,6 +111,8 @@ const TransportForm = () => {
       });
     } catch (err) {
       console.error('API Error:', err);
+      
+      // More specific error messages based on observed issues
       if (err.message && err.message.includes("railway station")) {
         setError('Could not find railway stations near the provided locations. Please try more specific location names including city names.');
       } else {

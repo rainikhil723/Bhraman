@@ -1,5 +1,4 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-
 import LandingPage from './pages/LandingPage';
 import DelhiPage from './pages/DelhiPage';
 import VaranasiPage from './pages/VaranasiPage';
@@ -19,16 +18,22 @@ import { useLocation } from 'react-router-dom';
 import TransportForm from './components/TransportForm';
 import ResultsPage from './components/ResultsPage';
 
-
 function AppContent() {
   const location = useLocation();
   const showNavbarOnlyOnLanding = location.pathname === "/";
 
   return (
     <>
-      {showNavbarOnlyOnLanding && <Navbar />} {/* Show only on "/" */}
+      {showNavbarOnlyOnLanding && <Navbar />}
       <Routes>
+        {/* Main landing route */}
         <Route path="/" element={<LandingPage />} />
+        
+        {/* Transport routes - added these above other results routes */}
+        <Route path="/transport" element={<TransportForm />} />
+        <Route path="/transport/results" element={<ResultsPage />} />
+        
+        {/* Destination pages (kept exactly the same) */}
         <Route path="/results/delhi" element={<DelhiPage />} />
         <Route path="/results/varanasi" element={<VaranasiPage />} />
         <Route path="/results/amritsar" element={<AmritsarPage />} />
@@ -40,10 +45,12 @@ function AppContent() {
         <Route path="/results/agra" element={<AgraPage />} />
         <Route path="/results/uttarakhand" element={<UttarakhandPage />} />
         <Route path="/results/udaipur" element={<UdaipurPage />} />
+        
+        {/* Auth pages (kept exactly the same) */}
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
-        <Route path="/" element={<TransportForm />} />
-        <Route path="/results" element={<ResultsPage />} />
+        
+        {/* Removed the duplicate root route */}
       </Routes>
     </>
   );

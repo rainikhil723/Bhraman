@@ -419,7 +419,6 @@ export default function ResultsPage() {
 
           {/* Interactive Map */}
           <div className="mb-4">
-          a
             <h3 className="text-lg font-semibold mb-2 flex items-center gap-2">
               <FaMapMarkerAlt className="text-blue-500" />
               Route Map

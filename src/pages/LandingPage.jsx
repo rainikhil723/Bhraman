@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState ,useEffect } from 'react';
 import { useNavigate, Link } from "react-router-dom";
 import { MapPin, Clock, Brain, Route, Filter, Zap, ArrowRight, Search } from 'lucide-react';
+
 
 export default function LandingPage() {
   const navigate = useNavigate();
   const [query, setQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
-
+ const [isVisible, setIsVisible] = useState({});
   const cityList = ["Delhi", "Jaipur", "Varanasi", "Mumbai", "Agra", "Uttarakhand", "Amritsar", "Hyderabad", "Bengaluru", "Pune", "Goa", "Udaipur"];
 
   const handleInputChange = (e) => {
@@ -18,14 +19,13 @@ export default function LandingPage() {
     setSuggestions(value ? filtered : []);
   };
 
- 
 const handleSuggestionClick = (city) => {
   const cityLower = city.toLowerCase();
   const matched = cityList.map(c => c.toLowerCase());
   if (matched.includes(cityLower)) {
     navigate(`/results/${cityLower}`);
   } else {
-    navigate("/city-not-found");
+    navigate("/c");
   }
 };
 
@@ -42,7 +42,9 @@ const handleSearch = () => {
     }
   }
 };
-  
+
+
+
   const featuredCities = [
     {
       name: "Delhi",
@@ -63,6 +65,42 @@ const handleSearch = () => {
         "Varanasi, a spiritual heart of India, is known for its Ganga Aarti, ghats, and sacred temples. It's a city where timeless traditions and devotion meet along the banks of the Ganges.",
     }
   ];
+    const features = [
+    {
+      icon: <Brain className="w-8 h-8" />,
+      title: "AI-Powered Planning",
+      description: "Smart algorithms analyze your preferences to create personalized itineraries"
+    },
+    {
+      icon: <Route className="w-8 h-8" />,
+      title: "Multi-Modal Routes",
+      description: "Optimized transport combinations across trains, flights, buses, and local transit"
+    },
+    {
+      icon: <Filter className="w-8 h-8" />,
+      title: "Smart Filters",
+      description: "Time and budget constraints automatically integrated into your travel plan"
+    }
+  ];
+
+    // Intersection Observer for fade-in animations
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsVisible(prev => ({ ...prev, [entry.target.id]: true }));
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    const elements = document.querySelectorAll('[data-animate]');
+    elements.forEach(el => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, []);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -117,61 +155,169 @@ const handleSearch = () => {
         </div>
       </section>
 
-      {/* Featured Cities */}
-      <section id="explore" className="px-6 py-16 bg-gray-50">
-        <h3 className="text-3xl font-semibold text-center text-blue-700 mb-10">Explore Indian Cities</h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {featuredCities.map((city) => (
-            <div
-              key={city.name}
-              className="relative bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition group "
-            >
-              <img
-                src={city.img}
-                alt={city.name}
-                className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105"
-              />
+      {/* What is BhramanAI */}
+      <section id="features" className="py-20 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-6">
+          <div 
+            data-animate
+            id="features-title"
+            className={`text-center mb-16 transition-all duration-1000 ${
+              isVisible['features-title'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+            }`}
+          >
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
+              Travel Intelligence
+              <span className="block text-blue-600">Redefined</span>
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              BhramanAI combines artificial intelligence with deep travel expertise to create seamless, personalized journeys across India
+            </p>
+          </div>
 
-              {/* Overlay */}
-              <div className="absolute inset-0 bg-black bg-opacity-60 text-white flex flex-col justify-center items-center p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <h4 className="text-2xl font-bold mb-2">{city.name}</h4>
-                <p className="text-sm text-center">{city.description}</p>
+          <div className="grid md:grid-cols-3 gap-8">
+            {features.map((feature, index) => (
+              <div
+                key={feature.title}
+                data-animate
+                id={`feature-${index}`}
+                className={`bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-500 border border-gray-100 ${
+                  isVisible[`feature-${index}`] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+                }`}
+                style={{ transitionDelay: `${index * 200}ms` }}
+              >
+                <div className="text-blue-600 mb-4">
+                  {feature.icon}
+                </div>
+                <h3 className="text-xl font-semibold text-gray-800 mb-4">
+                  {feature.title}
+                </h3>
+                <p className="text-gray-600 leading-relaxed">
+                  {feature.description}
+                </p>
               </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Cities */}
+      <section id="cities" className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-6">
+          <div 
+            data-animate
+            id="cities-title"
+            className={`text-center mb-16 transition-all duration-1000 ${
+              isVisible['cities-title'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+            }`}
+          >
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
+              Discover India's
+              <span className="block text-blue-600">Heritage Cities</span>
+            </h2>
+            <p className="text-xl text-gray-600">
+              Explore curated destinations with AI-powered insights and local expertise
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {featuredCities.map((city, index) => (
+              <div
+                key={city.name}
+                data-animate
+                id={`city-${index}`}
+                className={`group relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 ${
+                  isVisible[`city-${index}`] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+                }`}
+                style={{ transitionDelay: `${index * 200}ms` }}
+              >
+                <div className="relative h-64 overflow-hidden">
+                  <img
+                    src={city.img}
+                    alt={city.name}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                  <div className="absolute bottom-4 left-4 right-4">
+                    <h3 className="text-2xl font-bold text-white mb-1">{city.name}</h3>
+                    <p className="text-sm text-white/80">{city.highlights}</p>
+                  </div>
+                </div>
+                
+                <div className="p-6">
+                  <p className="text-gray-600 mb-4 leading-relaxed">
+                    {city.description}
+                  </p>
+                  <button 
+                    onClick={() => handleSuggestionClick(city.name)}
+                    className="flex items-center gap-2 text-blue-600 hover:text-blue-700 font-semibold transition-colors group"
+                  >
+                    Explore {city.name}
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Smart Planner CTA */}
+      <section id="planner" className="py-20 bg-gradient-to-br from-blue-600 to-blue-800">
+        <div className="max-w-7xl mx-auto px-6">
+          <div 
+            data-animate
+            id="planner-content"
+            className={`text-center text-white transition-all duration-1000 ${
+              isVisible['planner-content'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+            }`}
+          >
+            <div className="max-w-4xl mx-auto">
+              <h2 className="text-4xl md:text-5xl font-bold mb-6">
+                Ready to Plan Your
+                <span className="block text-yellow-400">Perfect Journey?</span>
+              </h2>
+              <p className="text-xl mb-8 text-blue-100">
+                Let our AI create a personalized itinerary based on your preferences, budget, and time constraints
+              </p>
+              
+              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 mb-8 border border-white/20">
+                <h3 className="text-2xl font-semibold mb-6 text-white">Smart Planning Preview</h3>
+                <div className="grid md:grid-cols-3 gap-6 text-left">
+                  <div className="flex items-start gap-3">
+                    <Clock className="w-6 h-6 text-yellow-400 mt-1 flex-shrink-0" />
+                    <div>
+                      <h4 className="font-semibold text-white mb-1">Time Optimization</h4>
+                      <p className="text-blue-100 text-sm">AI calculates optimal durations and schedules</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <Route className="w-6 h-6 text-yellow-400 mt-1 flex-shrink-0" />
+                    <div>
+                      <h4 className="font-semibold text-white mb-1">Smart Routes</h4>
+                      <p className="text-blue-100 text-sm">Multi-modal transport combinations</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <Zap className="w-6 h-6 text-yellow-400 mt-1 flex-shrink-0" />
+                    <div>
+                      <h4 className="font-semibold text-white mb-1">Real-time Updates</h4>
+                      <p className="text-blue-100 text-sm">Live adjustments based on conditions</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <button className="bg-gradient-to-r from-yellow-500 to-orange-500 text-white px-8 py-4 rounded-2xl text-lg font-semibold hover:from-yellow-600 hover:to-orange-600 transition-all transform hover:scale-105 shadow-lg">
+                Start Planning My Trip
+              </button>
             </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Trip Planner Section */}
-      <section id="planner" className="px-6 py-16 bg-white border-t">
-        <h3 className="text-3xl font-semibold text-center text-blue-700 mb-10">Plan Your Trip</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-          <div>
-            <label className="block text-gray-700 mb-2 font-medium">Choose Destination</label>
-            <input type="text" className="w-full px-4 py-3 border rounded-xl shadow-sm" placeholder="E.g., Delhi" />
-            <label className="block text-gray-700 mt-6 mb-2 font-medium">Travel Dates</label>
-            <input type="date" className="w-full px-4 py-3 border rounded-xl shadow-sm" />
-            <label className="block text-gray-700 mt-6 mb-2 font-medium">Number of People</label>
-            <input type="number" className="w-full px-4 py-3 border rounded-xl shadow-sm" placeholder="e.g., 2" />
-            <button className="mt-6 px-6 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700">
-              Generate Itinerary
-            </button>
-          </div>
-          <div className="bg-blue-50 p-6 rounded-xl shadow">
-            <h4 className="text-xl font-semibold mb-4 text-blue-600">Sample Plan Preview</h4>
-            <ul className="list-disc list-inside text-gray-700 space-y-2">
-              <li>🕘 Estimated Time to Visit: 3 Days</li>
-              <li>🚕 Best Transport: Metro + Auto Rickshaw</li>
-              <li>🍽 Famous Food: Chole Bhature, Paratha</li>
-              <li>🛍 What to Buy: Handicrafts, Spices</li>
-              <li>💸 Budget Estimate: ₹5,000 - ₹7,000</li>
-            </ul>
           </div>
         </div>
       </section>
 
-           {/* Footer */}
-      <footer className="bg-gray-900 text-white">
+
+
+     <footer className="bg-gray-900 text-white">
         <div className="max-w-7xl mx-auto px-6 py-16">
           <div className="grid md:grid-cols-4 gap-8">
             <div className="md:col-span-2">
@@ -217,10 +363,9 @@ const handleSearch = () => {
           </div>
         </div>
       </footer>
-
-      
-
-
     </div>
+
+
+    
   );
 }

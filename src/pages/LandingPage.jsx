@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from "react-router-dom";
+import { MapPin, Clock, Brain, Route, Filter, Zap, ArrowRight, Search } from 'lucide-react';
 
 export default function LandingPage() {
   const navigate = useNavigate();
@@ -169,88 +170,55 @@ const handleSearch = () => {
         </div>
       </section>
 
-      <footer className="bg-blue-600 text-white">
-  <div className="w-full max-w-screen-2xl mx-auto px-8 py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16 text-left">
-    
-    {/* Get in Touch */}
-    <div>
-      <h3 className="text-lg mb-4 font-bold text-white">Get in Touch</h3>
-      <p className="mb-2 flex items-start gap-2">
-        <span>📍</span>
-        <span>Bhraman Tourism Office, Ministry of Tourism, Government of India, Transport Bhawan, Sansad Marg, New Delhi - 110001</span>
-      </p>
-      <p className="mb-2 flex items-center gap-2">
-        <span>📧</span>
-        <span>info@incredibleindia.org</span>
-      </p>
-      <p className="flex items-center gap-2">
-        <span>📞</span>
-        <span>+91 11-23311237</span>
-      </p>
+           {/* Footer */}
+      <footer className="bg-gray-900 text-white">
+        <div className="max-w-7xl mx-auto px-6 py-16">
+          <div className="grid md:grid-cols-4 gap-8">
+            <div className="md:col-span-2">
+              <h3 className="text-2xl font-bold mb-6">BhramanAI</h3>
+              <p className="text-gray-400 mb-6 leading-relaxed max-w-md">
+                Intelligent travel planning powered by AI, designed to make exploring India seamless and personalized. Part of the Digital India initiative.
+              </p>
+              <div className="space-y-2 text-gray-400">
+                <p className="flex items-center gap-2">
+                  <MapPin className="w-4 h-4" />
+                  Ministry of Tourism, New Delhi
+                </p>
+                <p className="flex items-center gap-2">
+                  <span>📧</span>
+                  info@bhramanai.gov.in
+                </p>
+              </div>
+            </div>
+            
+            <div>
+              <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
+              <ul className="space-y-2 text-gray-400">
+                <li><a href="#" className="hover:text-white transition-colors">Destinations</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Travel Guidelines</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Support</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">About</a></li>
+              </ul>
+            </div>
+            
+            <div>
+              <h4 className="text-lg font-semibold mb-4">Tourism Initiatives</h4>
+              <ul className="space-y-2 text-gray-400">
+                <li><a href="#" className="hover:text-white transition-colors">Incredible India</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Digital Tourism</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Swadesh Darshan</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">PRASHAD</a></li>
+              </ul>
+            </div>
+          </div>
+          
+          <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
+            <p>© 2025 BhramanAI. Powered by Ministry of Tourism, Government of India 🇮🇳</p>
+          </div>
+        </div>
+      </footer>
 
-      {/* Quick Links under Get in Touch */}
-      <div className="mt-10">
-        <h3 className="text-lg  mb-4 font-bold text-white">Quick Links</h3>
-        <ul className="space-y-2 list-disc list-inside">
-          <li>Explore Destinations</li>
-          <li>Travel Guidelines</li>
-          <li>Culture & Heritage</li>
-          <li>Contact Support</li>
-          <li>About Incredible India</li>
-          <li>Travel FAQs</li>
-        </ul>
-      </div>
-    </div>
-
-    {/* Department of Tourism */}
-    <div>
-      <h3 className="text-lg font-bold mb-4 text-white">Ministry of Tourism</h3>
-      <ul className="space-y-2 list-disc list-inside">
-        <li>Tourism Policy</li>
-        <li>Annual Reports</li>
-        <li>Press Releases</li>
-        <li>Right to Information</li>
-        <li>Incredible India Campaign</li>
-        <li>Media Gallery</li>
-        <li>Research & Statistics</li>
-        <li>Tenders & Notices</li>
-      </ul>
-      <h4 className="mt-6 mb-3 font-bold text-white text-lg">Hospitality & Services</h4>
-      <ul className="space-y-2 list-disc list-inside">
-        <li>Hotel Listing</li>
-        <li>Travel Agent Registration</li>
-        <li>Homestay Initiatives</li>
-        <li>Tour Guide Program</li>
-      </ul>
-    </div>
-
-    {/* Trade */}
-    <div>
-      <h3 className="text-lg font-bold mb-4 text-white">Tourism Initiatives</h3>
-      <ul className="space-y-2 list-disc list-inside">
-        <li>Invest in Indian Tourism</li>
-        <li>Swadesh Darshan Scheme</li>
-        <li>PRASHAD Scheme</li>
-        <li>Bhraman</li>
-        <li>Tourism Mart India</li>
-        <li>Eco-Tourism Development</li>
-        <li>Rural Tourism Projects</li>
-        <li>Skill Development in Hospitality</li>
-        <li>Digital Tourism Tools</li>
-        <li>Start-up India in Tourism</li>
-        <li>Medical & Wellness Tourism</li>
-        <li>Heritage City Development</li>
-        <li>Accredited Service Providers</li>
-        <li>Tourism Vision 2047</li>
-      </ul>
-    </div>
-  </div>
-
-  {/* Bottom Bar */}
-  <div className="py-6 bg-blue-600 text-center text-sm border-t border-blue-100">
-    © 2025 BhramanAI. Built for Incredible India 🇮🇳
-  </div>
-</footer>
+      
 
 
     </div>

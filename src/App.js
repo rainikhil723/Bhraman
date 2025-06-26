@@ -17,6 +17,8 @@ import Navbar from "./components/Navbar";
 import { useLocation } from 'react-router-dom';
 import TransportForm from './components/TransportForm';
 import ResultsPage from './components/ResultsPage';
+import CityNotFound from './pages/CityNotFound';
+
 
 function AppContent() {
   const location = useLocation();
@@ -45,6 +47,7 @@ function AppContent() {
         <Route path="/results/agra" element={<AgraPage />} />
         <Route path="/results/uttarakhand" element={<UttarakhandPage />} />
         <Route path="/results/udaipur" element={<UdaipurPage />} />
+        <Route path="/city-not-found" element={<CityNotFound />} />
         
         {/* Auth pages (kept exactly the same) */}
         <Route path="/login" element={<LoginPage />} />

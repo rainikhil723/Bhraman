@@ -17,16 +17,31 @@ export default function LandingPage() {
     setSuggestions(value ? filtered : []);
   };
 
-  const handleSuggestionClick = (city) => {
-    navigate(`/results/${city.toLowerCase()}`);
-  };
+ 
+const handleSuggestionClick = (city) => {
+  const cityLower = city.toLowerCase();
+  const matched = cityList.map(c => c.toLowerCase());
+  if (matched.includes(cityLower)) {
+    navigate(`/results/${cityLower}`);
+  } else {
+    navigate("/city-not-found");
+  }
+};
 
-  const handleSearch = () => {
-    if (query) {
-      navigate(`/results/${query.toLowerCase()}`);
+
+const handleSearch = () => {
+  if (query) {
+    const city = query.toLowerCase();
+    const matched = cityList.map(c => c.toLowerCase());
+    if (matched.includes(city)) {
+      navigate(`/results/${city}`);
+    } else {
+      navigate("/city-not-found");
+
     }
-  };
-
+  }
+};
+  
   const featuredCities = [
     {
       name: "Delhi",

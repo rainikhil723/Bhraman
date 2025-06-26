@@ -110,47 +110,68 @@ const handleSearch = () => {
   return (
     <div className="min-h-screen bg-white text-gray-800">
       {/* Hero Section */}
-      <section className="relative w-full min-h-screen overflow-hidden">
-        <video autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover z-0">
+      <section className="relative w-full h-screen overflow-hidden">
+        <video 
+          autoPlay 
+          loop 
+          muted 
+          playsInline 
+          className="absolute inset-0 w-full h-full object-cover"
+        >
           <source src="/videos/Adventure.mp4" type="video/mp4" />
         </video>
-        <div className="absolute inset-0 bg-black/50 flex flex-col items-center justify-center text-white text-center px-4 z-10">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 leading-tight">
-            Discover India with Intelligence
-          </h2>
-          <p className="text-base sm:text-lg md:text-xl mb-4">
-            Smart planning, real-time info, and personalized travel — all in one app.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-3 w-full max-w-md">
-            <div className="relative w-full max-w-md">
-              <input
-                type="text"
-                placeholder="Search city or place..."
-                value={query}
-                onChange={handleInputChange}
-                onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-                className="w-full px-4 py-3 rounded-xl text-black shadow focus:outline-none"
-              />
+        
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/50 to-black/60" />
+        
+        <div className="relative z-10 h-full flex flex-col items-center justify-center text-white px-6">
+          <div className="text-center max-w-4xl mx-auto">
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
+              Intelligent Travel
+              <span style={{ color: "orange", fontWeight: "bold", color: "orange !important" }} className="block font-bold">
+                Starts Here
+              </span>
+            </h1>
+            <p className="text-xl md:text-2xl mb-12 text-white/90 max-w-2xl mx-auto leading-relaxed">
+              AI-powered trip planning with smart routes, real-time insights, and personalized experiences across India
+            </p>
+            
+            {/* Search Bar */}
+            <div className="relative max-w-2xl mx-auto mb-8">
+              <div className="relative">
+                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                <input
+                  type="text"
+                  placeholder="Where would you like to explore?"
+                  value={query}
+                  onChange={handleInputChange}
+                  onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+                  className="w-full pl-12 pr-4 py-4 bg-white/95 backdrop-blur-sm text-gray-800 rounded-2xl text-lg shadow-2xl focus:outline-none focus:ring-4 focus:ring-yellow-400/50 transition-all"
+                />
+                <button
+                  onClick={handleSearch}
+                  className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-yellow-500 to-orange-500 text-white px-6 py-2 rounded-xl hover:from-yellow-600 hover:to-orange-600 transition-all font-semibold"
+                >
+                  Explore
+                </button>
+              </div>
+              
               {suggestions.length > 0 && (
-                <ul className="absolute left-0 right-0 mt-1 bg-white rounded-xl shadow z-10 max-h-40 overflow-y-auto">
+                <ul className="absolute left-0 right-0 mt-2 bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl z-20 max-h-60 overflow-y-auto">
                   {suggestions.map((city) => (
                     <li
                       key={city}
                       onClick={() => handleSuggestionClick(city)}
-                      className="px-4 py-2 hover:bg-gray-100 cursor-pointer text-black"
+                      className="px-6 py-3 hover:bg-gray-100 cursor-pointer text-gray-800 border-b border-gray-100 last:border-b-0 transition-colors"
                     >
-                      {city}
+                      <div className="flex items-center gap-3">
+                        <MapPin className="w-4 h-4 text-gray-400" />
+                        {city}
+                      </div>
                     </li>
                   ))}
                 </ul>
               )}
             </div>
-            <button
-              onClick={handleSearch}
-              className="w-full sm:w-auto px-6 py-0 bg-yellow-500 text-white rounded-xl hover:bg-yellow-600 transition-all"
-            >
-              Explore Now
-            </button>
           </div>
         </div>
       </section>
@@ -307,8 +328,9 @@ const handleSearch = () => {
                 </div>
               </div>
               
-              <button className="bg-gradient-to-r from-yellow-500 to-orange-500 text-white px-8 py-4 rounded-2xl text-lg font-semibold hover:from-yellow-600 hover:to-orange-600 transition-all transform hover:scale-105 shadow-lg">
+              <button onClick={() => navigate("/results/varanasi")} className="bg-gradient-to-r from-yellow-500 to-orange-500 text-white px-8 py-4 rounded-2xl text-lg font-semibold hover:from-yellow-600 hover:to-orange-600 transition-all transform hover:scale-105 shadow-lg">
                 Start Planning My Trip
+                
               </button>
             </div>
           </div>
@@ -332,7 +354,7 @@ const handleSearch = () => {
                 </p>
                 <p className="flex items-center gap-2">
                   <span>📧</span>
-                  info@bhramanai.gov.in
+                  rainikhil7232gmail.com || shekhar5980singh@gmail.clearTimeout
                 </p>
               </div>
             </div>

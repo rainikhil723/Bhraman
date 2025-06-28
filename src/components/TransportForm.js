@@ -100,7 +100,7 @@ const TransportForm = () => {
         console.warn('Trip planning warnings:', data.warnings);
       }
 
-      navigate('/transport/results', {
+      navigate('/results', {
         state: {
           trip: {
             ...data,

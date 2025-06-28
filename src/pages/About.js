@@ -146,10 +146,14 @@ const AboutSection = () => {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <div className="mb-8">
-              <div className="inline-flex items-center justify-center w-24 h-24 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full mb-6">
-                <img src="/images/logo.jpg" alt="BhramanAI Logo" className=" items-center justify-center w-40 h-30" />
+              <div className="inline-flex items-center justify-center w-24 h-24 rounded-full overflow-hidden mb-6">
+  <img 
+    src="/images/logo.jpg" 
+    alt="BhramanAI Logo" 
+    className="w-full h-full object-cover"
+  />
+</div>
 
-              </div>
             </div>
             <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
               About <span className="text-blue-600">BhramanAI</span>
@@ -160,7 +164,7 @@ const AboutSection = () => {
             </p>
             
           {/* Video Section */}
-<div class="max-w-2x1 mx-40 mb-20 aspect-[16/16] ">
+<div class="max-w-2x1 mx-10 mb-20 aspect-[16/16] ">
   <div className="bg-gradient-to-r from-blue-500 to-blue-600 rounded-2xl p-8 shadow-2xl">
     <div className="bg-gray-900 rounded-xl aspect-video overflow-hidden">
       <iframe
@@ -472,4 +476,4 @@ const AboutSection = () => {
   );
 };
 
-export default AboutSection;
+export default AboutSection;  

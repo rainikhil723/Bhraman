@@ -56,7 +56,7 @@ const AboutSection = () => {
       photo: "/images/nikhil.png",
       front: {
         description: "Full-stack developer specializing in the MERN stack, focused on building responsive, high-performance web applications. I turn ideas into scalable, maintainable code with seamless frontend experiences and robust backend architecture",
-        resumeLink: "/resumes/nikhil-rai.pdf"
+        resumeLink: "/videos/nikhil-rai.pdf"
       },
       back: {
         tools: ["React", "Node", "Tailwind CSS", "Express", "SQL", "MongoDB", "Git"],
@@ -77,7 +77,7 @@ const AboutSection = () => {
       photo: "/images/santosh.jpg",
       front: {
         description: "I design meaningful and aesthetically pleasing digital interfaces that simplify user interaction. Passionate about crafting experiences that connect users seamlessly with technology.",
-        resumeLink: "/resumes/santosh-rawat.pdf"
+        resumeLink: "/videos/santosh-rawat.pdf"
       },
       back: {
         tools: ["Figma", "Adobe XD", "Sketch", "Photoshop", "Canva", "Cad Modelling"],
@@ -97,7 +97,7 @@ const AboutSection = () => {
       photo: "/images/shekhar.jpg",
       front: {
         description: "Frontend specialist focused on creating responsive, accessible web applications. I bring designs to life with clean code and smooth user experiences.",
-        resumeLink: "/resumes/chandrashekhar-singh.pdf"
+        resumeLink: "/videos/chandrashekhar-singh.pdf"
       },
       back: {
         tools: ["HTML", "CSS", "JavaScript", "React", "Tailwind CSS", "Git"],

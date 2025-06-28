@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+
 import LandingPage from './pages/LandingPage';
 import DelhiPage from './pages/DelhiPage';
 import VaranasiPage from './pages/VaranasiPage';
@@ -18,6 +19,8 @@ import { useLocation } from 'react-router-dom';
 import TransportForm from './components/TransportForm';
 import ResultsPage from './components/ResultsPage';
 import CityNotFound from './pages/CityNotFound';
+import About from "./pages/About";
+
 
 
 function AppContent() {
@@ -26,16 +29,9 @@ function AppContent() {
 
   return (
     <>
-      {showNavbarOnlyOnLanding && <Navbar />}
+      {showNavbarOnlyOnLanding && <Navbar />} {/* Show only on "/" */}
       <Routes>
-        {/* Main landing route */}
         <Route path="/" element={<LandingPage />} />
-        
-        {/* Transport routes - added these above other results routes */}
-        <Route path="/transport" element={<TransportForm />} />
-        <Route path="/transport/results" element={<ResultsPage />} />
-        
-        {/* Destination pages (kept exactly the same) */}
         <Route path="/results/delhi" element={<DelhiPage />} />
         <Route path="/results/varanasi" element={<VaranasiPage />} />
         <Route path="/results/amritsar" element={<AmritsarPage />} />
@@ -47,13 +43,13 @@ function AppContent() {
         <Route path="/results/agra" element={<AgraPage />} />
         <Route path="/results/uttarakhand" element={<UttarakhandPage />} />
         <Route path="/results/udaipur" element={<UdaipurPage />} />
-        <Route path="/city-not-found" element={<CityNotFound />} />
-        
-        {/* Auth pages (kept exactly the same) */}
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
-        
-        {/* Removed the duplicate root route */}
+        <Route path="/transport" element={<TransportForm />} />
+        <Route path="/results" element={<ResultsPage />} />
+        <Route path="/city-not-found" element={<CityNotFound />} />
+        <Route path="/about" element={<About />} />
+
       </Routes>
     </>
   );
